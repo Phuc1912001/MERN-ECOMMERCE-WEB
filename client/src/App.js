@@ -8,6 +8,7 @@ import Dashboard from "./pages/user/Dashboard";
 import PrivateRoute from "./components/routes/PrivateRoute";
 import Menu from "./components/nav/menu";
 
+
 const PageNotFound = () => {
   return (
     <div className="d-flex justify-content-center align-items-center vh-100">
@@ -25,8 +26,9 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        {/* đại loại là muốn vào dasboard thì phải đăng nhập */}
         <Route path="/dashboard" element={<PrivateRoute />}>
-          <Route path="" element={<Dashboard />} />
+          <Route path="user" element={<Dashboard />} />
         </Route>
         <Route path="*" element={<PageNotFound />} replace />
       </Routes>
