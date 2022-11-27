@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import Jumbotron from "../components/cards/jumbotron";
 
 const Home = () => {
   return (
-    <div>Home</div>
-  )
-}
+    <div>
+      <Jumbotron title="hello world" />
+      <div>Home</div>
+    </div>
+  );
+};
 
-export default Home
+export default Home;

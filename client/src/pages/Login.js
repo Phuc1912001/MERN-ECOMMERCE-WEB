@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import Jumbotron from "../components/cards/jumbotron";
 
 const Login = () => {
   return (
-    <div>Login</div>
-  )
-}
+    <>
+      <Jumbotron title="Đăng nhập" />
+      <div>Login</div>
+    </>
+  );
+};
 
-export default Login
+export default Login;
