@@ -1,13 +1,13 @@
-import React from "react";
 import Jumbotron from "../components/cards/Jumbotron";
+import { useAuth } from "../context/auth";
 
-const Home = () => {
+export default function Home() {
+  const [auth, setAuth] = useAuth();
+
   return (
     <div>
-      <Jumbotron title="hello world" />
-      <div>Home</div>
+      <Jumbotron title="Hello World" />
+      <pre>{JSON.stringify(auth, null, 4)}</pre>
     </div>
   );
-};
-
-export default Home;
+}
