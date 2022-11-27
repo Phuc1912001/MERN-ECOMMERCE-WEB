@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Dashboard from "./pages/user/Dashboard";
+import AdminDashboard from "./pages/admin/Dashboard";
+
 import PrivateRoute from "./components/routes/PrivateRoute";
 import Menu from "./components/nav/menu";
 
@@ -29,6 +31,7 @@ export default function App() {
         {/* đại loại là muốn vào dasboard thì phải đăng nhập */}
         <Route path="/dashboard" element={<PrivateRoute />}>
           <Route path="user" element={<Dashboard />} />
+          <Route path="admin" element={<AdminDashboard />} />
         </Route>
         <Route path="*" element={<PageNotFound />} replace />
       </Routes>
