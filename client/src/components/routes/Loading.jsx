@@ -4,7 +4,7 @@ import LoadingGIF from "../../images/loading.gif";
 
 export default function Loading({ path = "login" }) {
   // state
-  const [count, setCount] = useState(3);
+  const [count, setCount] = useState(2);
   // hooks
   const navigate = useNavigate();
   const location = useLocation();
