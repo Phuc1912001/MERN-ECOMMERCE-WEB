@@ -50,6 +50,7 @@ export const list = async (req, res) => {
       .populate("category")
       .select("-photo")
       .limit(12)
+      // sớm nhất sẽ đk hiện lên trước
       .sort({ createdAt: -1 });
 
     res.json(products);
