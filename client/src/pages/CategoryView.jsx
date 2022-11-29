@@ -33,7 +33,7 @@ export default function CategoryView() {
         subTitle={`${products?.length} products found in "${category?.name}"`}
       />
 
-      <div className="container-fluid">
+      <div className="container">
         <div className="row mt-3">
           {products?.map((p) => (
             <div key={p._id} className="col-md-4">

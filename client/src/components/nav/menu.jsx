@@ -70,7 +70,9 @@ export default function Menu() {
         <li className="nav-item mt-1">
           <Badge
             count={cart?.length >= 1 ? cart.length : 0}
+            //vị trí của noti
             offset={[-5, 11]}
+            // show số 0 nếu cart là 0
             showZero={true}
           >
             <NavLink className="nav-link" aria-current="page" to="/cart">
