@@ -172,7 +172,7 @@ export const productsCount = async (req, res) => {
 
 export const listProducts = async (req, res) => {
   try {
-    const perPage = 3;
+    const perPage = 6;
     const page = req.params.page ? req.params.page : 1;
 
     const products = await Product.find({})
@@ -203,3 +203,22 @@ export const productsSearch = async (req, res) => {
     console.log(err);
   }
 };
+
+
+export const relatedProducts = async (req, res) => {
+  try {
+    const { productId, categoryId } = req.params;
+    const related = await Product.find({
+      category: categoryId,
+      _id: { $ne: productId },
+    })
+      .select("-photo")
+      .populate("category")
+      .limit(3);
+
+    res.json(related);
+  } catch (err) {
+    console.log(err);
+  }
+};
+

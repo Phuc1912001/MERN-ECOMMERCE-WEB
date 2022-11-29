@@ -1,9 +1,11 @@
-import moment from "moment";
 import { Badge } from "antd";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductCard({ p }) {
+  const navigate = useNavigate();
+
   return (
-    <div className="card mb-3 hoverable  ">
+    <div className="card mb-3 hoverable">
       <Badge.Ribbon text={`${p?.sold} sold`} color="red">
         <Badge.Ribbon
           text={`${
@@ -18,7 +20,7 @@ export default function ProductCard({ p }) {
             className="card-img-top"
             src={`${process.env.REACT_APP_API}/product/photo/${p._id}`}
             alt={p.name}
-            style={{ height: "300px", weight: "50px", objectFit: "cover" }}
+            style={{ height: "300px", objectFit: "cover" }}
           />
         </Badge.Ribbon>
       </Badge.Ribbon>
@@ -40,6 +42,7 @@ export default function ProductCard({ p }) {
         <button
           className="btn btn-primary col card-button"
           style={{ borderBottomLeftRadius: "5px" }}
+          onClick={() => navigate(`/product/${p.slug}`)}
         >
           View Product
         </button>
