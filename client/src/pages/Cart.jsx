@@ -19,6 +19,17 @@ export default function Cart() {
     localStorage.setItem("cart", JSON.stringify(myCart));
   };
 
+  const cartTotal = () => {
+    let total = 0;
+    cart.map((item) => {
+      total += item.price;
+    });
+    return total.toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
+  };
+
   return (
     <>
       <Jumbotron
@@ -58,11 +69,11 @@ export default function Cart() {
           <div className="row">
             <div className="col-md-8">
               <div className="row">
-                {cart?.map((p) => (
+                {cart?.map((p, index) => (
                   <div
-                    key={p._id}
+                    key={index}
                     className="card mb-3"
-                    style={{ maxWidth: 540 }}
+                    // style={{ maxWidth: 540 }}
                   >
                     <div className="row g-0">
                       <div className="col-md-4">
@@ -80,7 +91,13 @@ export default function Cart() {
                       </div>
                       <div className="col-md-8">
                         <div className="card-body">
-                          <h5 className="card-title">{p.name}</h5>
+                          <h5 className="card-title">
+                            {p.name}{" "}
+                            {p?.price?.toLocaleString("en-US", {
+                              style: "currency",
+                              currency: "USD",
+                            })}
+                          </h5>
                           <p className="card-text">{`${p?.description?.substring(
                             0,
                             50
@@ -107,7 +124,49 @@ export default function Cart() {
               </div>
             </div>
 
-            <div className="col-md-4">Total / Address / Payments</div>
+            <div className="col-md-4">
+              <h4>Your cart summary</h4>
+              Total / Address / Payments
+              <hr />
+              <h6>Total: {cartTotal()}</h6>
+              {auth?.user?.address ? (
+                <>
+                  <div className="mb-3">
+                    <hr />
+                    <h4>Address:</h4>
+                    <h5>{auth?.user?.address}</h5>
+                  </div>
+                  <button
+                    className="btn btn-outline-warning"
+                    onClick={() => navigate("/dashboard/user/profile")}
+                  >
+                    Update address
+                  </button>
+                </>
+              ) : (
+                <div className="mb-3">
+                  {auth?.token ? (
+                    <button
+                      className="btn btn-outline-warning"
+                      onClick={() => navigate("/dashboard/user/profile")}
+                    >
+                      Add delivery address
+                    </button>
+                  ) : (
+                    <button
+                      className="btn btn-outline-danger mt-3"
+                      onClick={() =>
+                        navigate("/login", {
+                          state: "/cart",
+                        })
+                      }
+                    >
+                      Login to checkout
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
