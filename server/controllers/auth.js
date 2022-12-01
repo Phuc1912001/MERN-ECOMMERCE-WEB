@@ -2,6 +2,7 @@ import User from "../models/user.js";
 import { hashPassword, comparePassword } from "../helpers/auth.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import Order from "../models/order.js";
 
 dotenv.config();
 
@@ -111,7 +112,6 @@ export const updateProfile = async (req, res) => {
     const updated = await User.findByIdAndUpdate(
       req.user._id,
       {
-        // nếu có nêm thì thay băng name còn k thì lấy name từ user
         name: name || user.name,
         password: hashedPassword || user.password,
         address: address || user.address,
@@ -126,3 +126,25 @@ export const updateProfile = async (req, res) => {
   }
 };
 
+export const getOrders = async (req, res) => {
+  try {
+    const orders = await Order.find({ buyer: req.user._id })
+      .populate("products", "-photo")
+      .populate("buyer", "name");
+    res.json(orders);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const allOrders = async (req, res) => {
+  try {
+    const orders = await Order.find({})
+      .populate("products", "-photo")
+      .populate("buyer", "name")
+      .sort({ createdAt: "-1" });
+    res.json(orders);
+  } catch (err) {
+    console.log(err);
+  }
+};
