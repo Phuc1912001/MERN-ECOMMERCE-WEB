@@ -5,7 +5,7 @@ const router = express.Router();
 // middlewares
 import { requireSignin, isAdmin } from "../middlewares/auth.js";
 // controllers
-import { register, login, secret } from "../controllers/auth.js";
+import { register, login, secret, updateProfile } from "../controllers/auth.js";
 
 router.post("/register", register);
 router.post("/login", login);
